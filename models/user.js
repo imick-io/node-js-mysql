@@ -16,4 +16,15 @@ module.exports = class User {
         console.log(err);
       });
   }
+
+  static async findById(id) {
+    return db
+      .execute("SELECT * FROM users WHERE id = ?", [id])
+      .then(([rows, fieldData]) => {
+        return rows[0];
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 };
