@@ -27,4 +27,16 @@ module.exports = class User {
         console.log(err);
       });
   }
+
+  async create() {
+    try {
+      const [rows, fieldData] = await db.execute(
+        "INSERT INTO users (name, email) VALUES (?, ?)",
+        [this.name, this.email]
+      );
+      return rows;
+    } catch (err) {
+      console.log(err);
+    }
+  }
 };

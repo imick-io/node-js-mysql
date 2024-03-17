@@ -21,3 +21,16 @@ exports.findById = (req, res, next) => {
       res.status(500).json({ message: "An error occurred" });
     });
 };
+
+exports.create = (req, res, next) => {
+  const user = new User(req.body.name, req.body.email);
+  user
+    .create()
+    .then((result) => {
+      res.status(201).json({ message: "User created" });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({ message: "An error occurred" });
+    });
+};
